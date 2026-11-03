@@ -1,10 +1,8 @@
-
 from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from driveeasy.booking import BookingService, BookingConflictError
-
+from driveeasy.booking import BookingConflictError, BookingService
 
 NOW = datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc)
 START = datetime(2026, 11, 5, 12, 0, tzinfo=timezone.utc)
@@ -35,9 +33,7 @@ def test_vehicle_available_after_hold_expires():
     service.create_hold("CAR-001", START, END, now=NOW)
 
     later = NOW + timedelta(minutes=16)
-    new_hold = service.create_hold(
-        "CAR-001", START, END, now=later
-    )
+    new_hold = service.create_hold("CAR-001", START, END, now=later)
 
     assert new_hold.vehicle_id == "CAR-001"
 

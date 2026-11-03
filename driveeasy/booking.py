@@ -3,7 +3,6 @@ from datetime import datetime, timedelta, timezone
 from threading import RLock
 from uuid import uuid4
 
-
 HOLD_DURATION = timedelta(minutes=15)
 
 
@@ -56,14 +55,11 @@ class BookingService:
                     continue
 
                 overlaps = (
-                    rental_start < hold.rental_end
-                    and hold.rental_start < rental_end
+                    rental_start < hold.rental_end and hold.rental_start < rental_end
                 )
 
                 if overlaps:
-                    raise BookingConflictError(
-                        "Vehicle already has an active hold"
-                    )
+                    raise BookingConflictError("Vehicle already has an active hold")
 
             hold = BookingHold(
                 hold_id=str(uuid4()),

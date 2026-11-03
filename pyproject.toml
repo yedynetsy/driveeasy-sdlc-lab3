@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "driveeasy"
+version = "1.0.2.dev0"
+description = "DriveEasy booking hold service for SDLC Lab 3"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9,<10",
+    "pytest-cov>=7,<8",
+    "ruff>=0.14,<1",
+    "build>=1,<2",
+]
+
+[tool.setuptools.packages.find]
+include = ["driveeasy*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=driveeasy --cov-report=term-missing --cov-fail-under=80"
