@@ -40,3 +40,10 @@ def test_vehicle_available_after_hold_expires():
     )
 
     assert new_hold.vehicle_id == "CAR-001"
+
+
+def test_cannot_hold_vehicle_with_blank_id():
+    service = BookingService()
+
+    with pytest.raises(ValueError, match="Vehicle ID is required"):
+        service.create_hold("   ", START, END, now=NOW)

@@ -33,7 +33,7 @@ class BookingService:
         now: datetime | None = None,
     ) -> BookingHold:
 
-        if not vehicle_id:
+        if not vehicle_id or not vehicle_id.strip():
             raise ValueError("Vehicle ID is required")
 
         if rental_start.tzinfo is None or rental_end.tzinfo is None:
